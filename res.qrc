@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/arrow.png</file>
+    <file>icons/tencent.png</file>
+    <file>icons/bilibili.png</file>
+    <file>icons/apple.png</file>
+    <file>icons/blbl.png</file>
+    <file>icons/close.png</file>
+    <file>icons/exit.png</file>
+    <file>icons/homeicon.png</file>
+    <file>icons/login.png</file>
+    <file>icons/minimize.png</file>
+    <file>icons/minimizing.png</file>
+    <file>icons/register.png</file>
+    <file>icons/TV.png</file>
+  </qresource>
+</RCC>
