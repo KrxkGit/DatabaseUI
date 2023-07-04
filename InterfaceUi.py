@@ -174,10 +174,10 @@ class Ui_MainWindow(object):
         self.pushButton_couchos_info.setMinimumSize(QtCore.QSize(0, 30))
         self.pushButton_couchos_info.setObjectName("pushButton_couchos_info")
         self.verticalLayout_2.addWidget(self.pushButton_couchos_info)
-        self.pushButton_couchos_info_2 = QtWidgets.QPushButton(self.frame_6)
-        self.pushButton_couchos_info_2.setMinimumSize(QtCore.QSize(0, 30))
-        self.pushButton_couchos_info_2.setObjectName("pushButton_couchos_info_2")
-        self.verticalLayout_2.addWidget(self.pushButton_couchos_info_2)
+        self.pushButton_stats_info = QtWidgets.QPushButton(self.frame_6)
+        self.pushButton_stats_info.setMinimumSize(QtCore.QSize(0, 30))
+        self.pushButton_stats_info.setObjectName("pushButton_stats_info")
+        self.verticalLayout_2.addWidget(self.pushButton_stats_info)
         self.pushButton_web = QtWidgets.QPushButton(self.frame_6)
         self.pushButton_web.setMinimumSize(QtCore.QSize(0, 30))
         self.pushButton_web.setObjectName("pushButton_web")
@@ -208,8 +208,22 @@ class Ui_MainWindow(object):
         self.stackedWidget.setObjectName("stackedWidget")
         self.page_home = QtWidgets.QWidget()
         self.page_home.setObjectName("page_home")
-        self.label = QtWidgets.QLabel(self.page_home)
-        self.label.setGeometry(QtCore.QRect(240, 240, 192, 24))
+        self.frame_89 = QtWidgets.QFrame(self.page_home)
+        self.frame_89.setGeometry(QtCore.QRect(190, 160, 311, 161))
+        self.frame_89.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_89.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_89.setObjectName("frame_89")
+        self.verticalLayout_66 = QtWidgets.QVBoxLayout(self.frame_89)
+        self.verticalLayout_66.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_66.setSpacing(0)
+        self.verticalLayout_66.setObjectName("verticalLayout_66")
+        self.frame_91 = QtWidgets.QFrame(self.frame_89)
+        self.frame_91.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_91.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_91.setObjectName("frame_91")
+        self.horizontalLayout_53 = QtWidgets.QHBoxLayout(self.frame_91)
+        self.horizontalLayout_53.setObjectName("horizontalLayout_53")
+        self.label = QtWidgets.QLabel(self.frame_91)
         self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label.setStyleSheet("font: 18pt \"幼圆\";")
         self.label.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -217,6 +231,25 @@ class Ui_MainWindow(object):
         self.label.setTextFormat(QtCore.Qt.PlainText)
         self.label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label.setObjectName("label")
+        self.horizontalLayout_53.addWidget(self.label)
+        self.verticalLayout_66.addWidget(self.frame_91)
+        self.frame_90 = QtWidgets.QFrame(self.frame_89)
+        self.frame_90.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_90.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_90.setObjectName("frame_90")
+        self.horizontalLayout_52 = QtWidgets.QHBoxLayout(self.frame_90)
+        self.horizontalLayout_52.setObjectName("horizontalLayout_52")
+        self.label_106 = QtWidgets.QLabel(self.frame_90)
+        self.label_106.setMinimumSize(QtCore.QSize(0, 50))
+        self.label_106.setStyleSheet("font: 16pt \"幼圆\";")
+        self.label_106.setObjectName("label_106")
+        self.horizontalLayout_52.addWidget(self.label_106)
+        self.label_role = QtWidgets.QLabel(self.frame_90)
+        self.label_role.setStyleSheet("font: 14pt \"幼圆\";")
+        self.label_role.setText("")
+        self.label_role.setObjectName("label_role")
+        self.horizontalLayout_52.addWidget(self.label_role)
+        self.verticalLayout_66.addWidget(self.frame_90)
         self.stackedWidget.addWidget(self.page_home)
         self.page_stu_info = QtWidgets.QWidget()
         self.page_stu_info.setObjectName("page_stu_info")
@@ -253,6 +286,10 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover{\n"
 "    color: rgb(166, 168, 255);\n"
+"}\n"
+"\n"
+"#frame_27{\n"
+"border:1px solid;\n"
 "}")
         self.frame_27.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_27.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -296,6 +333,14 @@ class Ui_MainWindow(object):
         self.label_21.setText("")
         self.label_21.setObjectName("label_21")
         self.horizontalLayout_15.addWidget(self.label_21)
+        self.pushButton_stu_delete = QtWidgets.QPushButton(self.frame_27)
+        self.pushButton_stu_delete.setMinimumSize(QtCore.QSize(55, 18))
+        self.pushButton_stu_delete.setObjectName("pushButton_stu_delete")
+        self.horizontalLayout_15.addWidget(self.pushButton_stu_delete)
+        self.label_107 = QtWidgets.QLabel(self.frame_27)
+        self.label_107.setText("")
+        self.label_107.setObjectName("label_107")
+        self.horizontalLayout_15.addWidget(self.label_107)
         self.pushButton_stu_clear = QtWidgets.QPushButton(self.frame_27)
         self.pushButton_stu_clear.setMinimumSize(QtCore.QSize(55, 18))
         self.pushButton_stu_clear.setObjectName("pushButton_stu_clear")
@@ -438,6 +483,14 @@ class Ui_MainWindow(object):
         self.pushButton_TV.setIcon(icon8)
         self.pushButton_TV.setObjectName("pushButton_TV")
         self.verticalLayout_3.addWidget(self.pushButton_TV)
+        self.pushButton_scut = QtWidgets.QPushButton(self.frame_8)
+        self.pushButton_scut.setMinimumSize(QtCore.QSize(0, 25))
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/scut.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_scut.setIcon(icon9)
+        self.pushButton_scut.setIconSize(QtCore.QSize(70, 16))
+        self.pushButton_scut.setObjectName("pushButton_scut")
+        self.verticalLayout_3.addWidget(self.pushButton_scut)
         self.horizontalLayout_6.addWidget(self.frame_8)
         self.stackedWidget.addWidget(self.page_web)
         self.page_my = QtWidgets.QWidget()
@@ -529,12 +582,16 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover{\n"
 "    color: rgb(166, 168, 255);\n"
+"}\n"
+"\n"
+"#frame_30{\n"
+"border:1px solid;\n"
 "}")
         self.frame_30.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_30.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_30.setObjectName("frame_30")
         self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.frame_30)
-        self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_18.setContentsMargins(2, 0, 2, 0)
         self.horizontalLayout_18.setSpacing(0)
         self.horizontalLayout_18.setObjectName("horizontalLayout_18")
         self.pushButton_13 = QtWidgets.QPushButton(self.frame_30)
@@ -701,12 +758,16 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover{\n"
 "    color: rgb(166, 168, 255);\n"
+"}\n"
+"\n"
+"#frame_29{\n"
+"border:1px solid;\n"
 "}")
         self.frame_29.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_29.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_29.setObjectName("frame_29")
         self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.frame_29)
-        self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_17.setContentsMargins(2, 0, 2, 0)
         self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
         self.pushButton_10 = QtWidgets.QPushButton(self.frame_29)
@@ -873,12 +934,16 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover{\n"
 "    color: rgb(166, 168, 255);\n"
+"}\n"
+"\n"
+"#frame_24{\n"
+"border:0.5px solid;\n"
 "}")
         self.frame_24.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_24.setObjectName("frame_24")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_24)
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_14.setContentsMargins(2, 0, 2, 0)
         self.horizontalLayout_14.setSpacing(0)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
         self.pushButton_8 = QtWidgets.QPushButton(self.frame_24)
@@ -1009,11 +1074,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_18.addWidget(self.frame_25)
         self.verticalLayout_20.addWidget(self.frame_23)
         self.stackedWidget.addWidget(self.page_couchos)
-        self.page_5 = QtWidgets.QWidget()
-        self.page_5.setObjectName("page_5")
-        self.verticalLayout_65 = QtWidgets.QVBoxLayout(self.page_5)
+        self.page_stats = QtWidgets.QWidget()
+        self.page_stats.setObjectName("page_stats")
+        self.verticalLayout_65 = QtWidgets.QVBoxLayout(self.page_stats)
         self.verticalLayout_65.setObjectName("verticalLayout_65")
-        self.frame_31 = QtWidgets.QFrame(self.page_5)
+        self.frame_31 = QtWidgets.QFrame(self.page_stats)
         self.frame_31.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_31.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_31.setObjectName("frame_31")
@@ -1052,6 +1117,10 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:hover{\n"
 "    color: rgb(166, 168, 255);\n"
+"}\n"
+"\n"
+"#frame_87{\n"
+"border:1px solid;\n"
 "}")
         self.frame_87.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_87.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -1111,14 +1180,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_63.addWidget(self.frame_88)
         self.verticalLayout_77.addWidget(self.frame_86)
         self.verticalLayout_65.addWidget(self.frame_31)
-        self.stackedWidget.addWidget(self.page_5)
+        self.stackedWidget.addWidget(self.page_stats)
         self.horizontalLayout_5.addWidget(self.stackedWidget)
         self.horizontalLayout_4.addWidget(self.frame_7)
         self.verticalLayout.addWidget(self.frame_3)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(7)
+        self.stackedWidget.setCurrentIndex(6)
         self.pushButton_2.clicked.connect(MainWindow.close) # type: ignore
         self.pushButton_3.clicked.connect(MainWindow.showMinimized) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1126,20 +1195,22 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Konchok"))
-        self.pushButton.setText(_translate("MainWindow", "Konchok"))
+        self.pushButton.setText(_translate("MainWindow", "MIS"))
         self.pushButton_home.setText(_translate("MainWindow", "首页"))
         self.pushButton_stu_info.setText(_translate("MainWindow", "学生信息"))
         self.pushButton_tea_info.setText(_translate("MainWindow", "教师信息"))
         self.pushButton_course_info.setText(_translate("MainWindow", "课程信息"))
         self.pushButton_couchos_info.setText(_translate("MainWindow", "课程选择信息"))
-        self.pushButton_couchos_info_2.setText(_translate("MainWindow", "成绩统计"))
+        self.pushButton_stats_info.setText(_translate("MainWindow", "成绩统计"))
         self.pushButton_web.setText(_translate("MainWindow", "网址推荐"))
         self.pushButton_my.setText(_translate("MainWindow", "我的"))
-        self.label.setText(_translate("MainWindow", "欢迎登录我的界面"))
+        self.label.setText(_translate("MainWindow", "Welcome to MIS!"))
+        self.label_106.setText(_translate("MainWindow", "Your role:"))
         self.label_8.setText(_translate("MainWindow", "学生信息查询表"))
-        self.lineEdit_stu.setPlaceholderText(_translate("MainWindow", "请输入课程名"))
+        self.lineEdit_stu.setPlaceholderText(_translate("MainWindow", "请输入学号或姓名"))
         self.pushButton_stu_q.setText(_translate("MainWindow", "查询"))
         self.pushButton_stu_qall.setText(_translate("MainWindow", "查询全部信息"))
+        self.pushButton_stu_delete.setText(_translate("MainWindow", "删除行"))
         self.pushButton_stu_clear.setText(_translate("MainWindow", "清除"))
         self.lineEdit_stu_before.setPlaceholderText(_translate("MainWindow", "修改前"))
         self.lineEdit_stu_after.setPlaceholderText(_translate("MainWindow", "修改后"))
@@ -1148,12 +1219,13 @@ class Ui_MainWindow(object):
         self.pushButton_csdn.setText(_translate("MainWindow", "CSDN"))
         self.pushButton_apple.setText(_translate("MainWindow", "APPLE"))
         self.pushButton_TV.setText(_translate("MainWindow", "TENCENT VIDEO"))
+        self.pushButton_scut.setText(_translate("MainWindow", "SCUT"))
         self.lineEdit_M_pass1.setInputMask(_translate("MainWindow", "密码："))
         self.lineEdit_M_pass1.setText(_translate("MainWindow", "密码："))
         self.lineEdit_M_pass2.setInputMask(_translate("MainWindow", "确认密码："))
         self.pushButton_M_sure.setText(_translate("MainWindow", "确定"))
         self.label_5.setText(_translate("MainWindow", "教师信息查询表"))
-        self.lineEdit_tea.setPlaceholderText(_translate("MainWindow", "请输入课程名"))
+        self.lineEdit_tea.setPlaceholderText(_translate("MainWindow", "请输入教工号或姓名"))
         self.pushButton_tea_q.setText(_translate("MainWindow", "查询"))
         self.pushButton_tea_qall.setText(_translate("MainWindow", "查询全部信息"))
         self.pushButton_tea_clear.setText(_translate("MainWindow", "清除"))
@@ -1162,7 +1234,7 @@ class Ui_MainWindow(object):
         self.lineEdit_tea_after.setPlaceholderText(_translate("MainWindow", "修改后"))
         self.pushButton_tea_modify.setText(_translate("MainWindow", "修改"))
         self.label_6.setText(_translate("MainWindow", "课程信息查询表"))
-        self.lineEdit_course.setPlaceholderText(_translate("MainWindow", "请输入课程名"))
+        self.lineEdit_course.setPlaceholderText(_translate("MainWindow", "请输入课程名或课程ID"))
         self.pushButton_course_q.setText(_translate("MainWindow", "查询"))
         self.pushButton_course_qall.setText(_translate("MainWindow", "查询全部信息"))
         self.pushButton_course_clear.setText(_translate("MainWindow", "清除"))
