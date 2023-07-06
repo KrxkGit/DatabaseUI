@@ -44,7 +44,7 @@ class InsertWindow(QMainWindow):
         stu_class = self.ui.lineEdit_class.text()
         if id == '' or name == '' or sex == '' or age == '' or year == '' or stu_class == '':
             QMessageBox.information(self, "提示", "数据不能为空")
-        elif sex != 'male' or sex != 'female':
+        elif sex != 'male' and sex != 'female':
             QMessageBox.information(self, "提示", "注意性别修改")
         else:
             # if id=='' or 'name'=='' or sex=='' or age =='' or
