@@ -8,6 +8,9 @@ import webbrowser
 import sys
 import pymysql
 
+from insert_course import InsertCourseWindow
+from insert_stu import *
+
 # student_ID  name  set  entrance_age  entrance_year  class
 # course_ID  name  teacher_ID  credit grade  canceled_year
 # teacher_ID  name  course
@@ -32,17 +35,20 @@ class LoginWindow(QMainWindow):
 
         self.ui.pushButton_L_sure.setShortcut(QKeySequence("Return"))  # 绑定快捷键
         self.ui.pushButton_L_sure.clicked.connect(self.login_in)  # 绑定登录函数
+        icon = QIcon("./icons/homeicon.png")
+        self.setWindowIcon(icon)
         self.show()
 
     def login_in(self):
         account = self.ui.lineEdit_L_account.text()
         password = self.ui.lineEdit_L_password.text()
+
         account_list = []
         password_list = []
 
-        db = pymysql.connect(host='localhost',
+        db = pymysql.connect(host='110.41.2.230',
                              user='root',
-                             password='root',
+                             password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
@@ -86,6 +92,9 @@ class LoginWindow(QMainWindow):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.insert_stu = None
+        self.insert_course = None
+        self.insert_tea = None
         self.crow = 0
         self.ccol = 0
 
@@ -111,7 +120,7 @@ class MainWindow(QMainWindow):
         # self.ui.frame_6.setGraphicsEffect(self.shadow)
         self.ui.pushButton_home.clicked.connect(self.go_home)
         self.ui.pushButton_web.clicked.connect(self.go_web)
-        self.ui.pushButton_my.clicked.connect(lambda: self.ui.stackedWidget.setCurrentIndex(3))
+        self.ui.pushButton_my.clicked.connect(self.go_my)
         self.ui.pushButton_logout.clicked.connect(self.logout)
         self.ui.pushButton_M_sure.clicked.connect(self.change_password)
 
@@ -135,6 +144,9 @@ class MainWindow(QMainWindow):
         self.ui.pushButton_tea_clear.clicked.connect(self.clear_tea_info)
         self.ui.pushButton_course_clear.clicked.connect(self.clear_course_info)
         self.ui.pushButton_couchos_clear.clicked.connect(self.clear_couchos_info)
+
+        self.ui.pushButton_insert_stu.clicked.connect(self.insert_info_stu)
+        self.ui.pushButton_insert_course.clicked.connect(self.insert_info_course)
 
         self.ui.tableView_stu.setModel(self.model)
         self.ui.tableView_tea.setModel(self.model_tea)
@@ -164,7 +176,21 @@ class MainWindow(QMainWindow):
         #     self.ui.pushButton_web.setIcon(icon_none)
 
         self.ui.pushButton_stu_delete.clicked.connect(self.stu_delete)
+        self.ui.pushButton_delete_course.clicked.connect(self.course_delete)
         self.show()
+
+    def insert_info_course(self):
+        # pass
+        self.insert_course = InsertCourseWindow()
+        self.insert_course.my_Signal.connect(self.show_course_info)
+
+    def insert_info_stu(self):
+        self.insert_stu = InsertWindow()
+        self.insert_stu.my_Signal.connect(self.show_stu_info)
+
+    def go_my(self):
+        self.ui.stackedWidget.setCurrentIndex(3)
+        self.change_icon()
 
     def go_home(self):
         self.ui.stackedWidget.setCurrentIndex(0)
@@ -263,9 +289,9 @@ class MainWindow(QMainWindow):
             return
         else:  # 更改数据
             # 获取学号
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -279,12 +305,34 @@ class MainWindow(QMainWindow):
             db.close()
             self.show_stu_info()
 
+    def course_delete(self):
+        # pass
+        if user_now != 'admin':
+            QMessageBox.information(self, '提示', '无权限修改')
+            return
+        else:  # 更改数据
+            # 获取学号
+            db = pymysql.connect(host='110.41.2.230',
+                                 user='root',
+                                 password='KrxkKrxk',
+                                 database='database2',
+                                 charset='utf8')
+            cur = db.cursor()
+
+            cur.execute(f"select * from courses limit {self.crow},1")
+            rows = cur.fetchone()
+            data = rows[0]
+            cur.execute(f"delete from courses where course_ID = {data}")
+            db.commit()
+            cur.close()
+            db.close()
+            self.show_course_info()
 
     def course_avg(self):
         model_ = self.model_stats
-        db = pymysql.connect(host='localhost',
+        db = pymysql.connect(host='110.41.2.230',
                              user='root',
-                             password='root',
+                             password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
@@ -314,9 +362,9 @@ class MainWindow(QMainWindow):
 
     def stu_avg(self):
         model_ = self.model_stats
-        db = pymysql.connect(host='localhost',
+        db = pymysql.connect(host='110.41.2.230',
                              user='root',
-                             password='root',
+                             password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
@@ -350,10 +398,10 @@ class MainWindow(QMainWindow):
 
     def go_web(self):
         self.ui.stackedWidget.setCurrentIndex(2)
-        self.ui.pushButton_blbl.clicked.connect(lambda: webbrowser.open("bilibili.com"))
-        self.ui.pushButton_csdn.clicked.connect(lambda: webbrowser.open("csdn.net"))
-        self.ui.pushButton_apple.clicked.connect(lambda: webbrowser.open("apple.com.cn"))
-        self.ui.pushButton_TV.clicked.connect(lambda: webbrowser.open("v.qq.com"))
+        self.ui.pushButton_blbl.clicked.connect(lambda: webbrowser.open("www.bilibili.com"))
+        self.ui.pushButton_csdn.clicked.connect(lambda: webbrowser.open("www.csdn.net"))
+        self.ui.pushButton_apple.clicked.connect(lambda: webbrowser.open("www.apple.com.cn"))
+        self.ui.pushButton_TV.clicked.connect(lambda: webbrowser.open("www.v.qq.com"))
         self.ui.pushButton_scut.clicked.connect(lambda: webbrowser.open("www.scut.edu.cn"))
         self.change_icon()
 
@@ -378,7 +426,8 @@ class MainWindow(QMainWindow):
         if len(self.ui.lineEdit_M_pass1.text()) == 0 or len(self.ui.lineEdit_M_pass2.text()) == 0:
             self.ui.stackedWidget_2.setCurrentIndex(1)
         elif self.ui.lineEdit_M_pass1.text() == self.ui.lineEdit_M_pass2.text():
-            db = pymysql.connect(host='localhost', user='root', password='root', database='database2', charset='utf8')
+            db = pymysql.connect(host='110.41.2.230', user='root', password='KrxkKrxk', database='database2',
+                                 charset='utf8')
             cur = db.cursor()
             cur.execute(f"update user set password='{new_password}' where account = '{user_now}'")
             db.commit()
@@ -413,9 +462,9 @@ class MainWindow(QMainWindow):
         # student_ID  name  set  entrance_age  entrance_year  class
         # course_ID  name  teacher_ID  credit grade  canceled_year
         # teacher_ID  name  course
-        db = pymysql.connect(host='localhost',
+        db = pymysql.connect(host='110.41.2.230',
                              user='root',
-                             password='root',
+                             password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
@@ -438,9 +487,9 @@ class MainWindow(QMainWindow):
         elif tableview_ == 'couchos':
             model_ = self.model_couchos
 
-        db = pymysql.connect(host='localhost',
+        db = pymysql.connect(host='110.41.2.230',
                              user='root',
-                             password='root',
+                             password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
@@ -502,9 +551,9 @@ class MainWindow(QMainWindow):
         if stu_input == '':
             QMessageBox.information(self, "提示", "请输入学号或姓名")
         else:
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -599,9 +648,9 @@ class MainWindow(QMainWindow):
         if tea_input == '':
             QMessageBox.information(self, "提示", "请输入教工号或姓名")
         else:
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -697,9 +746,9 @@ class MainWindow(QMainWindow):
         if input == '':
             QMessageBox.information(self, "提示", "请输入课程ID")
         else:
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -826,9 +875,9 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, '提示', '请输入修改后的信息（可设置为“空”）')
         else:  # 更改数据
             # 获取学号
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -852,7 +901,6 @@ class MainWindow(QMainWindow):
             db.close()
             self.show_stu_info()
 
-
     def modify_score(self):
         if user_now == 'student' or user_now == 'admin':
             QMessageBox.information(self, '提示', '无权限修改')
@@ -862,9 +910,9 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, '提示', '请输入修改后的信息（可设置为“空”）')
         else:  # 更改数据
             # 获取成绩
-            db = pymysql.connect(host='localhost',
+            db = pymysql.connect(host='110.41.2.230',
                                  user='root',
-                                 password='root',
+                                 password='KrxkKrxk',
                                  database='database2',
                                  charset='utf8')
             cur = db.cursor()
@@ -896,6 +944,12 @@ class MainWindow(QMainWindow):
             db.close()
             self.show_couchos_info()
 
+
+# coding:utf-8
+
+import sys
+from PyQt5.QtCore import QSharedMemory
+from PyQt5.QtWidgets import *
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

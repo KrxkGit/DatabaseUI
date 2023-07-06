@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['main.py', 'InterfaceUi.py', 'LoginUi.py', 'res_rc.py'],
+    ['main.py', 'InterfaceUi.py', 'LoginUi.py', 'res_rc.py', 'insertStuUi.py', 'insertCourseWindow.py', 'insert_course.py', 'insert_stu.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -41,5 +41,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['pkq1.ico'],
+    icon=['pkq.ico'],
 )
