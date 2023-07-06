@@ -44,6 +44,8 @@ class InsertWindow(QMainWindow):
         stu_class = self.ui.lineEdit_class.text()
         if id == '' or name == '' or sex == '' or age == '' or year == '' or stu_class == '':
             QMessageBox.information(self, "提示", "数据不能为空")
+        elif sex != 'male' or sex != 'female':
+            QMessageBox.information(self, "提示", "注意性别修改")
         else:
             # if id=='' or 'name'=='' or sex=='' or age =='' or
             db = pymysql.connect(host='110.41.2.230',
@@ -56,13 +58,13 @@ class InsertWindow(QMainWindow):
             try:
                 cur.execute(f"insert into students "
                             f"values ({int(id)} ,'{name}', '{sex}', {int(age)}, {int(year)}, '{stu_class}')")
+                QMessageBox.information(self, "提示", "数据修改成功")
             except:
                 QMessageBox.information(self, "提示", "修改失败")
 
             db.commit()
             db.close()
             cur.close()
-            self.close()
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:

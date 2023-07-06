@@ -406,7 +406,7 @@ border-bottom-right-radius:20px;
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>4</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_home">
               <widget class="QFrame" name="frame_89">
@@ -516,6 +516,22 @@ border-bottom-right-radius:20px;
                  </widget>
                 </item>
                </layout>
+              </widget>
+              <widget class="QLabel" name="label_4">
+               <property name="geometry">
+                <rect>
+                 <x>580</x>
+                 <y>490</y>
+                 <width>131</width>
+                 <height>16</height>
+                </rect>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font:10pt &quot;幼圆&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Author:YJS</string>
+               </property>
               </widget>
              </widget>
              <widget class="QWidget" name="page_stu_info">
@@ -654,7 +670,7 @@ font: 9pt &quot;Adobe 黑体 Std R&quot;;</string>
                      <item>
                       <widget class="QLabel" name="label_3">
                        <property name="text">
-                        <string> </string>
+                        <string/>
                        </property>
                       </widget>
                      </item>

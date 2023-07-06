@@ -301,6 +301,22 @@ QPushButton:pressed{
                  </widget>
                 </item>
                 <item>
+                 <widget class="QLineEdit" name="lineEdit_R_role">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>35</height>
+                   </size>
+                  </property>
+                  <property name="echoMode">
+                   <enum>QLineEdit::Password</enum>
+                  </property>
+                  <property name="placeholderText">
+                   <string>身份（student,teacher）</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="pushButton_R_sure">
                   <property name="minimumSize">
                    <size>

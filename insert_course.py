@@ -5,7 +5,7 @@ Time：2023-07-06 23:16
 import sys
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 import pymysql
 
 from InsertCourseWindow import *
@@ -40,19 +40,25 @@ class InsertCourseWindow(QMainWindow):
         year = self.ui.lineEdit_year.text()
         stu_class = self.ui.lineEdit_class.text()
         # if id=='' or 'name'=='' or sex=='' or age =='' or
+        if id == '' or name == '' or sex == '' or age == '' or year == '' or stu_class == '':
+            QMessageBox.information(self, "提示", "数据不能为空")
         db = pymysql.connect(host='110.41.2.230',
                              user='root',
                              password='KrxkKrxk',
                              database='database2',
                              charset='utf8')
         cur = db.cursor()
+        try:
+            cur.execute(f"insert into courses "
+                        f"values ({id} ,'{name}', '{sex}', {int(age)}, {int(year)}, {stu_class})")
+            QMessageBox.information(self, "提示", "数据修改成功")
+        except:
+            QMessageBox.information(self, "提示", "修改失败")
 
-        cur.execute(f"insert into courses "
-                    f"values ({id} ,'{name}', '{sex}', {int(age)}, {int(year)}, {stu_class})")
         db.commit()
         db.close()
         cur.close()
-        self.close()
+
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:

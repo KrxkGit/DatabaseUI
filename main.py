@@ -15,6 +15,7 @@ from insert_stu import *
 # course_ID  name  teacher_ID  credit grade  canceled_year
 # teacher_ID  name  course
 user_now = ''  # 便于修改密码的账号识别
+role_now = ''
 
 
 class LoginWindow(QMainWindow):
@@ -35,9 +36,51 @@ class LoginWindow(QMainWindow):
 
         self.ui.pushButton_L_sure.setShortcut(QKeySequence("Return"))  # 绑定快捷键
         self.ui.pushButton_L_sure.clicked.connect(self.login_in)  # 绑定登录函数
+        self.ui.pushButton_R_sure.clicked.connect(self.register)
         icon = QIcon("./icons/homeicon.png")
         self.setWindowIcon(icon)
         self.show()
+
+    def register(self):
+        account = self.ui.lineEdit_R_account.text()
+        password_1 = self.ui.lineEdit_R_password1.text()
+        password_2 = self.ui.lineEdit_R_password2.text()
+        role = self.ui.lineEdit_R_role.text()
+        if password_1 != password_2:
+            QMessageBox.information(self, '提示', '密码输入不一致')
+        else:
+            db = pymysql.connect(host='110.41.2.230',
+                                 user='root',
+                                 password='KrxkKrxk',
+                                 database='database2',
+                                 charset='utf8')
+            cur = db.cursor()
+            cur.execute("select * from user")
+            values = cur.fetchall()
+            for value in values:
+                if value[0] == account:
+                    QMessageBox.information(self, '提示', '账号已存在')
+                    return
+            db.commit()
+            db.close()
+            cur.close()
+            try:
+                db = pymysql.connect(host='110.41.2.230',
+                                     user='root',
+                                     password='KrxkKrxk',
+                                     database='database2',
+                                     charset='utf8')
+                cur = db.cursor()
+                print(f"insert into user values ('{account}','{password_1}')")
+                cur.execute(f"insert into user values ('{account}','{password_1}','{role}')")
+
+                db.commit()
+                db.close()
+                cur.close()
+                QMessageBox.information(self, '提示', '注册成功')
+                self.ui.stackedWidget_2.setCurrentIndex(1)
+            except:
+                QMessageBox.information(self, '提示', '注册失败')
 
     def login_in(self):
         account = self.ui.lineEdit_L_account.text()
@@ -61,14 +104,20 @@ class LoginWindow(QMainWindow):
         print(account_list)
         print(password_list)
         db.commit()
-        db.close()
+
 
         for i in range(len(account_list)):
             if len(account) == 0 or len(password) == 0:
                 self.ui.stackedWidget.setCurrentIndex(1)
             elif account == account_list[i] and password == password_list[i]:
+                cur.execute(f"select role from user where account = '{account}'")
+                row = cur.fetchone()
+                print(row)
+                print(row[0])
                 global user_now
                 user_now = account
+                global role_now
+                role_now = row[0]
                 self.win = MainWindow()
                 self.close()
             else:
@@ -166,7 +215,7 @@ class MainWindow(QMainWindow):
         self.ui.tableView_couchos.clicked.connect(self.show_couchos_cell)
         self.ui.tableView_stu.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
-        self.ui.label_role.setText(user_now)
+        self.ui.label_role.setText(role_now)
         index = self.ui.stackedWidget.currentIndex()
         # if index == 0:
         #     icon = QIcon("./icons/dog.png")
@@ -284,7 +333,7 @@ class MainWindow(QMainWindow):
             self.ui.pushButton_course_info.setIcon(icon_none)
 
     def stu_delete(self):
-        if user_now != 'admin':
+        if role_now != 'admin':
             QMessageBox.information(self, '提示', '无权限修改')
             return
         else:  # 更改数据
@@ -307,7 +356,7 @@ class MainWindow(QMainWindow):
 
     def course_delete(self):
         # pass
-        if user_now != 'admin':
+        if role_now != 'admin':
             QMessageBox.information(self, '提示', '无权限修改')
             return
         else:  # 更改数据
@@ -392,9 +441,11 @@ class MainWindow(QMainWindow):
 
     def logout(self):
         global user_now
+        global role_now
         self.close()
         self.login = LoginWindow()
         user_now = ''
+        role_now = ''
 
     def go_web(self):
         self.ui.stackedWidget.setCurrentIndex(2)
@@ -867,7 +918,7 @@ class MainWindow(QMainWindow):
         self.ccol = column
 
     def modify_stu(self):
-        if user_now != 'admin':
+        if role_now != 'admin':
             QMessageBox.information(self, '提示', '无权限修改')
             return
         text = self.ui.lineEdit_stu_after.text()
@@ -902,7 +953,7 @@ class MainWindow(QMainWindow):
             self.show_stu_info()
 
     def modify_score(self):
-        if user_now == 'student' or user_now == 'admin':
+        if role_now == 'student' or role_now == 'admin':
             QMessageBox.information(self, '提示', '无权限修改')
             return
         text = self.ui.lineEdit_couchos_after.text()
